@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            position: relative;
+        }
+        .peach {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background-color: orange;
+            position: absolute;
+            top: 400px;
+        }
+        .kiwi {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background-color: green;
+            position: absolute;
+            top: 200px;
+        }
+    </style>
+</head>
+<body>
+    <div class='peach'></div>
+    <script>
+        let interval;
+        let apple = {
+            x: 0,
+            y: 0,
+            a: 0
+        }
+        const div = document.createElement('div')
+        div.className = 'apple'
+        div.style.width = '50px'
+        div.style.height = '50px'
+        div.style.borderRadius = '50%'
+        div.style.background = 'red'
+        div.style.position = 'absolute'
+        document.body.appendChild(div)
+        function gravity() {
+            apple.a += 1
+            apple.y += apple.a
+            div.style.top = apple.a + 'px';
+            if (apple.a > 400) {
+                clearInterval(interval)
+            }
+        }
+        div.addEventListener('click', () => {
+            interval = setInterval(gravity, 10)
+        })
+        window.addEventListener('keydown', (e) => {
+            console.log(e.key)
+            if (e.key ==='ArrowRight') {
+                apple.x += 10;
+            }
+            if (e.key === 'ArrowLeft') {
+                apple.x -= 10;
+            }
+            if (e.key === 'ArrowUp') {
+                apple.a -= 10;
+            }
+            if (e.key === 'ArrowDown') {
+                apple.a += 10;
+            }
+            div.style.left = apple.x + 'px'
+            div.style.top = apple.a + 'px'
+        })
+    </script>
+</body>
+
+</html>
